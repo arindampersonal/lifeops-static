@@ -86,9 +86,9 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-white/30 text-xs">
-            &copy; {new Date().getFullYear()} LifeOps. A personal philosophy, not
-            a product.
+          <p className="text-white/40 text-xs">
+            &copy; {new Date().getFullYear()} LifeOps. Conceived and crafted with intention by{' '}
+            <span className="text-white/70 font-medium">Arindam Dutta</span>.
           </p>
           <p className="text-white/30 text-xs italic">
             Live well. Stay curious. Be kind.
