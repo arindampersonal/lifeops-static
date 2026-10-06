@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { ArrowRight, Clock, BookOpen } from 'lucide-react'
 import { stories } from '../data/stories'
 import ScrollReveal from './ScrollReveal'
