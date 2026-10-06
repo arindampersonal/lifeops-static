@@ -160,9 +160,12 @@ lifeops-static-page/
 
 ## 📝 How to Add Daily Content
 
-Adding new stories and daily thoughts is straightforward and code-free in structure:
+You have 3 easy ways to add content:
+1. **Interactive CLI (Fastest)**: Run `npm run add:thought` or `npm run add:story` in your terminal.
+2. **Ask AI Pair Programmer**: Simply tell Antigravity in chat: *"Add a new thought about X"* or *"Write a new story about Y"*.
+3. **Direct Code Edit**: Copy & paste an existing object at the top of the array in `src/data/thoughts.ts` or `src/data/stories.ts`.
 
-### 1. Adding a New Story
+### 1. Adding a New Story (Manual Method)
 Open [`src/data/stories.ts`](src/data/stories.ts) and add a new item to the `stories` array:
 
 ```typescript
@@ -236,6 +239,8 @@ Open [`src/data/thoughts.ts`](src/data/thoughts.ts) and append a new thought to 
 | Command | Description |
 |:---|:---|
 | `npm run dev` | Starts the Vite local development server with HMR |
+| `npm run add:thought` | Interactive prompt to add a new Thought of the Day |
+| `npm run add:story` | Interactive prompt to add a new Story |
 | `npm run build` | Runs TypeScript type-checking (`tsc -b`) and builds production assets to `/dist` |
 | `npm run preview` | Previews the local production build in `/dist` |
 | `npm run lint` | Runs the high-performance Oxlint linter across the project |
