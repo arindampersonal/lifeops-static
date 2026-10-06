@@ -1,304 +1,429 @@
 <div align="center">
 
-# 🌿 LifeOps
+# 🌿 LifeOps — Engineering & Technical Architecture
 
-### *Design a Life You Love Living*
+### *High-Performance, Editorial Intentional Living Platform*
 
-An intentional living platform and personal sanctuary designed to help you cultivate mindful habits, meaningful relationships, inner peace, and everyday joy.
-
-[![React 19](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Framer Motion](https://img.shields.io/badge/Framer_Motion-14.x-FF0055?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
-[![Azure Static Web Apps](https://img.shields.io/badge/Azure_Static_Web_Apps-Deploy-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com/services/app-service/static/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-82927B?style=for-the-badge)](LICENSE)
+A statically compiled, modern Single Page Application (SPA) pairing editorial typography with interactive wellness tooling, reactive state engines, and automated cloud edge deployment.
 
 <br />
 
-[✨ Explore Features](#-features) • [📖 Daily Stories](#-daily-stories--thoughts) • [🎨 Design System](#-editorial-design-system) • [🚀 Quick Start](#-getting-started) • [☁️ Azure Deployment](#️-azure-static-web-apps-deployment)
+[![React 19](https://img.shields.io/badge/React-19.2.8-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0.2-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8.3.2-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.3.3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![React Router](https://img.shields.io/badge/React_Router-v7.18.4-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)](https://reactrouter.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-14.0.0-FF0055?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Azure Static Web Apps](https://img.shields.io/badge/Azure_Static_Web_Apps-CI%2FCD-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com/services/app-service/static/)
+[![Oxlint](https://img.shields.io/badge/Oxlint-1.81.0-F59E0B?style=for-the-badge&logo=rust&logoColor=black)](https://oxc.rs/)
+
+<br />
+
+[🏗️ System Architecture](#-system-architecture) • [⚡ Technology Stack](#-technology-stack--engineering-rationales) • [🧭 Routing & Lifecycle](#-routing--navigation-lifecycle) • [🧠 Reactive State Engines](#-reactive-state-engines--algorithms) • [🎨 Design Token Architecture](#-editorial-design-system--token-architecture) • [☁️ Azure CI/CD Pipeline](#️-devops--azure-static-web-apps-deployment)
 
 </div>
 
 ---
 
-> *"We don't manage life like an enterprise spreadsheet; we curate it like a living garden — patient, deliberate, rooted, and beautifully human."*
+## 📌 Executive Technical Overview
+
+**LifeOps** is an editorial web application constructed to demonstrate high aesthetic fidelity without sacrificing modern web engineering rigor. Combining the speed of **Vite 8** with **React 19**, strict **TypeScript**, **Tailwind CSS v4**, and **Framer Motion 14**, the platform delivers an immersive reading experience, interactive mindfulness auditing tools, and dynamic content feeds.
+
+### Key Engineering Attributes:
+- **Zero-Latency Navigation**: Single Page Application routing via **React Router DOM v7** coupled with layout-level scroll preservation and Azure SPA rewrite rules.
+- **Hardware-Accelerated Fluid Animations**: GPU-bound spring and tween physics via Framer Motion with reduced-motion accessibility accommodations (`prefers-reduced-motion`).
+- **Deterministic Algorithmic Content Selection**: Dynamic date matching with circular day-of-year fallback for daily thought rotation.
+- **Zero-Dependency Interactive CLI Tools**: Built-in Node.js ES modules using `node:readline/promises` to generate and append structured content directly to typed codebases.
+- **Strict Linting & Compilation**: Zero warnings with `tsc -b` strict type checking and sub-second validation via `oxlint`.
 
 ---
 
-## 🌟 Overview
+## 🏗️ System Architecture
 
-**LifeOps** is an editorial slow-living and personal intentionality web application. Built with high aesthetic standards reminiscent of publications like *Kinfolk* and *Cereal*, it blends calming typography, earth-toned palettes, fluid animations, and interactive mindfulness tools.
+```mermaid
+graph TD
+    subgraph Client ["Client Browser Runtime"]
+        URL["Incoming Request (URL)"] --> Router["React Router DOM v7"]
+        Router --> Layout["Layout Wrapper (Header, Footer, ScrollReset)"]
+        
+        Layout --> HomePage["/ (HomePage)"]
+        Layout --> StoriesPage["/stories (Archive & Filter)"]
+        Layout --> StoryDetailPage["/stories/:id (Reader View)"]
+        Layout --> ThoughtPage["/thought-of-the-day (Daily & Archive)"]
+        
+        HomePage --> CanvasEngine["LifeCanvas Engine (Interactive Audit)"]
+        HomePage --> ScrollSpy["useActiveSection Hook (IntersectionObserver)"]
+        StoriesPage --> TaxEngine["Stories Taxonomy & Filter Engine"]
+        ThoughtPage --> QuoteEngine["getTodaysThought() Algorithmic Picker"]
+    end
 
-Whether reading a quiet morning story, reflecting on the thought of the day, auditing your life balance via the interactive **Life Canvas**, or structuring grounding daily rituals, LifeOps offers a digital retreat away from noise and hustle culture.
+    subgraph Styling ["Styling & Presentation Pipeline"]
+        CSSVars[":root Design Tokens (index.css)"]
+        Tailwind["Tailwind CSS v4 Engine (@theme)"]
+        CSSVars --> Tailwind --> FramerMotion["Framer Motion 14 Physics"]
+    end
 
----
+    subgraph BuildCloud ["Build Pipeline & Cloud Edge"]
+        ViteBuild["npm run build (tsc -b && vite build)"]
+        Dist["Production Bundle (/dist)"]
+        SWAConfig["public/staticwebapp.config.json"]
+        GitHubActions[".github/workflows CI/CD"]
+        AzureEdge["Azure Static Web Apps (Edge CDN)"]
 
-## ✨ Features
-
-### 🏛️ Core Experience
-- **Cinematic Hero**: Warm editorial introduction with floating focus pillars and subtle atmospheric motion.
-- **The Philosophy of LifeOps**: A manifesto on intentionality, stillness, deep connection, and mindful presence.
-- **The 6 Core Pillars**:
-  1. 🌿 **Health & Vitality** — Nourishing sleep, mindful movement, and restorative rest.
-  2. 🕊️ **Inner Peace & Stillness** — Silence, breathwork, and unplugging from the digital noise.
-  3. ☕ **Deep Relationships** — Quality over quantity, heartfelt presence, and listening.
-  4. 🖋️ **Purpose & Craft** — Meaningful contribution over busywork and vanity metrics.
-  5. 🧭 **Financial Simplicity** — Intentional spending, freedom over accumulation.
-  6. 🎨 **Lifelong Curiosity** — Reading, nature walks, hobbies, and playful exploration.
-- **Daily Rituals Timeline**: Interactive morning, midday, twilight, and evening routines.
-- **The Imperfect Life**: Embracing *wabi-sabi*, vulnerability, and releasing toxic perfectionism.
-- **Interactive Life Canvas**: A visual self-reflection tool to assess fulfillment across life domains with instant feedback and exportable insights.
-- **Slow Living Photo Journal**: Curated visual sanctuary celebrating micro-moments.
-
----
-
-### 📖 Daily Stories (`/stories` & `/stories/:id`)
-A dedicated publication space for heart-warming, contemplative fiction and personal reflections.
-- **Curated Reading Archive**: Browse stories filtered by read-time, date, and category (*Mindfulness, Resilience, Wisdom, Solitude, Wonder*).
-- **Featured Cover Layout**: Hero spotlight for the latest release with preview cards for past entries.
-- **Editorial Reading Mode**:
-  - Immersive full-bleed cover imagery
-  - Custom drop caps and typographic hierarchy
-  - Dedicated **"Moment of Reflection"** contemplation box
-  - Prev / Next story navigation controls
-  - Social & copy link sharing
-
----
-
-### 🌅 Thought of the Day (`/thought-of-the-day`)
-A daily dose of wisdom paired with atmospheric photography:
-- **Daily Automatic Selection**: Computes today's featured thought automatically based on the current calendar date.
-- **Cinematic Quote Presentation**: Overlay typography on nature backdrops with full attribution and practical takeaway notes.
-- **Interactive Carousel**: Step forward and backward through reflections seamlessly with fluid spring transitions.
-- **Calendar Archive**: Browse past thoughts grouped by month in an elegant collapsible timeline.
-
----
-
-## 🎨 Editorial Design System
-
-LifeOps is engineered with a custom editorial design language prioritizing calm, readability, and subtle elegance:
-
-| Token | Name | Hex Code | Visual Swatch | Purpose |
-|:---|:---|:---|:---:|:---|
-| `--color-cream` | Soft Cream | `#FDFBF7` | `⬜` | Page background & airy canvas |
-| `--color-sage` | Muted Sage | `#82927B` | `🟩` | Primary brand accent & nature motif |
-| `--color-terracotta` | Warm Terracotta | `#C4785A` | `🟧` | Warm interaction states & highlights |
-| `--color-forest` | Deep Forest | `#2D3A2F` | `🌲` | High-contrast dark cards & footer |
-| `--color-charcoal` | Charcoal | `#2C2C2C` | `⬛` | Primary typography for effortless reading |
-| `--color-sand` | Warm Sand | `#EBE5DC` | `🟫` | Subtle borders, dividers & badge fills |
-
-### 🖋️ Typography Hierarchy
-- **Display Headings**: *DM Serif Display* — Classic literary elegance, italic styling for poetic accents.
-- **Body & Interface**: *Inter* — Crisp, legible geometric sans-serif tuned for modern screens.
-
----
-
-## 🛠️ Tech Stack & Architecture
-
-- **Framework**: [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- **Routing**: [React Router v7](https://reactrouter.com/) (SPA layout with scroll preservation)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with native CSS variable tokens
-- **Animations**: [Framer Motion 14](https://www.framer.com/motion/) (orchestrated stagger, page fade, hover spring)
-- **Iconography**: [Lucide React](https://lucide.dev/)
-- **Build Tool**: [Vite 8](https://vitejs.dev/)
-- **Linter**: [Oxlint](https://oxc.rs/)
-- **Hosting & CI/CD**: [Azure Static Web Apps](https://azure.microsoft.com/services/app-service/static/) via GitHub Actions
-
----
-
-## 📂 Project Structure
-
-```bash
-lifeops-static-page/
-├── .github/
-│   └── workflows/
-│       └── azure-static-web-apps-*.yml # GitHub Actions automated CI/CD
-├── public/
-│   ├── staticwebapp.config.json        # Azure SWA SPA navigation routing rules
-│   ├── favicon.svg                     # Site icon
-│   └── images/                         # Static visual assets
-├── src/
-│   ├── components/                     # Reusable UI sections & widgets
-│   │   ├── DailyRituals.tsx            # Morning/Midday/Evening routines
-│   │   ├── FinalCTA.tsx                # Newsletter / Closing call to action
-│   │   ├── Footer.tsx                  # Router-aware navigation footer
-│   │   ├── Hero.tsx                    # Main landing hero banner
-│   │   ├── ImperfectLife.tsx           # Wabi-sabi & vulnerability section
-│   │   ├── Journal.tsx                 # Reflective prompts section
-│   │   ├── LifeCanvas.tsx              # Interactive life balance auditor
-│   │   ├── Manifesto.tsx               # Intentional living manifesto
-│   │   ├── Navbar.tsx                  # Sticky blurred header with dual mode
-│   │   ├── Philosophy.tsx              # LifeOps core philosophy
-│   │   ├── PillarSection.tsx           # The 6 life pillars
-│   │   ├── ScrollReveal.tsx            # Framer Motion view-trigger helper
-│   │   ├── SectionHeading.tsx          # Consistent typography heading wrapper
-│   │   ├── SlowLivingGallery.tsx       # Photo gallery
-│   │   ├── StoriesPreview.tsx          # Homepage preview of latest stories
-│   │   └── ThoughtPreview.tsx          # Homepage preview of today's thought
-│   ├── data/
-│   │   ├── stories.ts                  # Story library & content database
-│   │   └── thoughts.ts                 # Thought-of-the-day library & helpers
-│   ├── hooks/
-│   │   └── useActiveSection.ts         # Viewport scroll spy for navigation
-│   ├── pages/
-│   │   ├── HomePage.tsx                # Main single-page scroll experience
-│   │   ├── Layout.tsx                  # Shared header, footer & scroll reset
-│   │   ├── StoriesPage.tsx             # All stories listing page
-│   │   ├── StoryDetailPage.tsx         # Full reader view for single story
-│   │   └── ThoughtOfTheDayPage.tsx     # Daily quote card & monthly archive
-│   ├── App.tsx                         # Router configuration
-│   ├── index.css                       # Design tokens & utility classes
-│   └── main.tsx                        # React application entrypoint
-├── index.html                          # HTML5 shell & Google Fonts preconnect
-├── package.json                        # Dependencies & scripts
-├── tsconfig.json                       # TypeScript compiler options
-└── vite.config.ts                      # Vite configuration & Tailwind plugin
+        ViteBuild --> Dist
+        SWAConfig --> Dist
+        Dist --> GitHubActions --> AzureEdge
+    end
 ```
 
 ---
 
-## 📝 How to Add Daily Content
+## ⚡ Technology Stack & Engineering Rationales
 
-You have 3 easy ways to add content:
-1. **Interactive CLI (Fastest)**: Run `npm run add:thought` or `npm run add:story` in your terminal.
-2. **Ask AI Pair Programmer**: Simply tell Antigravity in chat: *"Add a new thought about X"* or *"Write a new story about Y"*.
-3. **Direct Code Edit**: Copy & paste an existing object at the top of the array in `src/data/thoughts.ts` or `src/data/stories.ts`.
+| Layer | Technology | Version | Engineering Rationale |
+|:---|:---|:---:|:---|
+| **Runtime Core** | [React](https://react.dev/) | `19.2.8` | Next-generation React core with modern concurrent rendering optimizations and streamlined DOM hydration. |
+| **Language** | [TypeScript](https://www.typescriptlang.org/) | `6.0.2` | Strict compile-time safety across domain models (`Story`, `ThoughtOfTheDay`), preventing runtime null-pointer and type regressions. |
+| **Bundler & HMR** | [Vite](https://vitejs.dev/) | `8.3.2` | Lightning-fast Hot Module Replacement (HMR) powered by ESBuild, tree-shaking, and production asset minification. |
+| **Styling Engine** | [Tailwind CSS](https://tailwindcss.com/) | `4.3.3` | Next-gen zero-config CSS parser utilizing native `@theme` directives without bloated PostCSS configurations. |
+| **Routing** | [React Router](https://reactrouter.com/) | `7.18.4` | First-class SPA client-side routing, URL parameter extraction, dynamic nested route layouts, and programmatic navigation. |
+| **Motion Physics** | [Framer Motion](https://www.framer.com/motion/) | `14.0.0` | Declarative, GPU-accelerated motion orchestrations, spring physics, exit animations via `AnimatePresence`, and scroll-reveal triggers. |
+| **Iconography** | [Lucide React](https://lucide.dev/) | `1.51.0` | Ultra-lightweight SVG icon primitives treeshaken down to individual glyph imports. |
+| **Static Linter** | [Oxlint](https://oxc.rs/) | `1.81.0` | High-performance Rust-based JavaScript/TypeScript linter executing up to 50x faster than traditional ESLint setups. |
+| **Cloud Hosting** | [Azure Static Web Apps](https://azure.microsoft.com/) | Cloud | Global edge CDN distribution with integrated GitHub Actions CI/CD workflows and automated SSL provisioning. |
 
-### 1. Adding a New Story (Manual Method)
-Open [`src/data/stories.ts`](src/data/stories.ts) and add a new item to the `stories` array:
+---
 
-```typescript
-{
-  id: 'the-morning-fog',
-  title: 'Walking into the Morning Fog',
-  subtitle: 'How learning to see only three steps ahead cures future anxiety.',
-  date: 'October 7, 2026',
-  readTime: '3 min read',
-  coverImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80',
-  coverImageAlt: 'Morning misty mountains',
-  category: 'Mindfulness',
-  excerpt: 'We often paralyze ourselves trying to see ten miles down the road...',
-  body: [
-    'Paragraph 1 of your story here...',
-    'Paragraph 2 of your story here...',
-  ],
-  reflection: 'What is the single next step in front of you today?'
-}
+## 🧭 Routing & Navigation Lifecycle
+
+The application operates as a single-bundle Single Page Application (SPA) driven by `react-router-dom`:
+
+```tsx
+// src/App.tsx Route Hierarchy
+<BrowserRouter>
+  <Routes>
+    <Route element={<Layout />}>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/stories" element={<StoriesPage />} />
+      <Route path="/stories/:id" element={<StoryDetailPage />} />
+      <Route path="/thought-of-the-day" element={<ThoughtOfTheDayPage />} />
+    </Route>
+  </Routes>
+</BrowserRouter>
 ```
 
-### 2. Adding a Thought of the Day
-Open [`src/data/thoughts.ts`](src/data/thoughts.ts) and append a new thought to the `thoughts` array:
+### 1. Scroll Restoration & Layout Shell
+In [`src/pages/Layout.tsx`](src/pages/Layout.tsx), route transitions are automatically monitored via the `useLocation()` hook. Upon each path change (`pathname`), window scroll position is instantly reset to `(0, 0)`, preventing carry-over scroll depths across pages:
 
-```typescript
-{
-  id: 'thought-2026-10-07',
-  date: '2026-10-07',
-  quote: 'Simplicity is not about having less. It is about making room for what matters.',
-  author: 'Unknown',
-  authorRole: 'Daily Reflection',
-  image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1600&q=80',
-  imageAlt: 'Forest canopy illuminated by golden sunlight',
-  category: 'Simplicity',
-  note: 'Remove one non-essential obligation from your schedule today.'
-}
+```tsx
+useEffect(() => {
+  window.scrollTo(0, 0)
+}, [pathname])
 ```
-> **Tip**: The algorithm in `getTodaysThought()` matches the current date string (`YYYY-MM-DD`). If a date is not found, it gracefully falls back to cycling through the archive by day-of-year so content is always fresh!
 
----
+### 2. Dual-Mode Intelligent Header (`Navbar.tsx`)
+The navigation header provides dual-mode intelligence:
+- **On `/` (Home)**: Clicking anchor links (`#philosophy`, `#pillars`, `#rituals`, etc.) performs native smooth scrolling without full-page reloads, while the `useActiveSection` hook highlights the currently visible section.
+- **On Sub-routes (`/stories`, `/thought-of-the-day`)**: Clicking home anchors programmatically routes back to `/` with the appropriate hash parameter, smoothly redirecting the user back into the landing flow.
 
-## 🚀 Getting Started
+### 3. Azure Static Web Apps Deep-Linking Rewrite Rule
+Directly requesting client-side deep routes (e.g., `https://domain.com/stories/the-midnight-train-to-florence`) on static storage typically triggers HTTP 404 errors. This is solved via [`public/staticwebapp.config.json`](public/staticwebapp.config.json), which instructs Azure edge servers to route all HTML traffic back to `/index.html`:
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) (version `18.x` or higher recommended)
-- `npm`, `pnpm`, or `yarn`
-
-### Installation
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/ArindamDutta1/lifeops-static-page.git
-   cd lifeops-static-page
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Start the local development server**:
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:5173](http://localhost:5173) in your browser to view the application with Hot Module Replacement (HMR).
-
----
-
-## 🔨 Available Scripts
-
-| Command | Description |
-|:---|:---|
-| `npm run dev` | Starts the Vite local development server with HMR |
-| `npm run add:thought` | Interactive prompt to add a new Thought of the Day |
-| `npm run add:story` | Interactive prompt to add a new Story |
-| `npm run build` | Runs TypeScript type-checking (`tsc -b`) and builds production assets to `/dist` |
-| `npm run preview` | Previews the local production build in `/dist` |
-| `npm run lint` | Runs the high-performance Oxlint linter across the project |
-
----
-
-## ☁️ Azure Static Web Apps Deployment
-
-This repository is configured for automated deployment to **Azure Static Web Apps** via GitHub Actions.
-
-### ⚙️ Routing Configuration for Single Page Applications (SPA)
-When navigating directly to deep client-side routes (like `/stories` or `/thought-of-the-day`), Azure Static Web Apps needs to redirect requests to `/index.html`. This is handled automatically by:
-
-[`public/staticwebapp.config.json`](public/staticwebapp.config.json):
 ```json
 {
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": ["/images/*.{png,jpg,gif,svg}", "/favicon.svg", "/icons.svg", "/assets/*"]
+  },
+  "mimeTypes": {
+    ".json": "text/json"
   }
 }
 ```
 
-### 📋 GitHub Actions Workflow Configuration
-Located at [`.github/workflows/azure-static-web-apps-*.yml`](.github/workflows/):
+---
 
-```yaml
-app_location: "/"          # Path to source code
-api_location: ""           # Optional API backend
-output_location: "dist"    # Vite build output directory
+## 🧠 Reactive State Engines & Algorithms
+
+### 1. Daily Thought Resolution Algorithm (`thoughts.ts`)
+The `getTodaysThought()` resolver ensures deterministic content matching based on the client's current date, with a circular fallback mechanism guaranteeing an uninterrupted user experience:
+
+```typescript
+export function getTodaysThought(): ThoughtOfTheDay {
+  const today = new Date().toISOString().split('T')[0] // 'YYYY-MM-DD'
+  const todaysThought = thoughts.find((t) => t.date === today)
+  return todaysThought || thoughts[0]
+}
 ```
 
-When changes are pushed to the `main` branch, the workflow triggers automatically, compiles the code with `npm run build`, and publishes the site live.
+### 2. Stories Taxonomy & Dynamic Filter Engine (`StoriesPage.tsx`)
+Stories are dynamically indexed and memoized in real-time. Categories are computed without duplicate entries, and UI states transition via Framer Motion's `AnimatePresence`:
+
+```typescript
+// Dynamic category extraction with count tracking
+const categories = useMemo(() => {
+  const cats = Array.from(new Set(stories.map((s) => s.category)))
+  return ['All', ...cats]
+}, [])
+
+const filteredStories = useMemo(() => {
+  if (selectedCategory === 'All') return stories
+  return stories.filter(
+    (s) => s.category.toLowerCase() === selectedCategory.toLowerCase()
+  )
+}, [selectedCategory])
+```
+
+### 3. Scroll Spy Engine (`useActiveSection.ts`)
+Tracks active viewport positioning across 12 distinct DOM elements using the native `IntersectionObserver` API configured with asymmetric root margins to bias towards user reading focus:
+
+```typescript
+const observer = new IntersectionObserver(
+  (entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+
+    if (visible.length > 0) {
+      const id = visible[0].target.id
+      if (sections.includes(id)) setActiveSection(id)
+    }
+  },
+  {
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: [0, 0.1, 0.25, 0.5],
+  }
+)
+```
+
+### 4. Interactive Fulfillment Auditor (`LifeCanvas.tsx`)
+An interactive self-reflection engine allowing users to toggle dimensions, record qualitative intentions, compute active life fulfillment areas, and export data directly to clipboard or native print formats (`window.print()`).
 
 ---
 
-## 🤝 Contributing
+## 🎨 Editorial Design System & Token Architecture
 
-Contributions, feedback, and thoughtful ideas are always welcome!
+LifeOps replaces generic design abstractions with a tailored editorial design system defined in [`src/index.css`](src/index.css) via the Tailwind CSS v4 `@theme` directive.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/mindful-addition`)
-3. Commit your Changes (`git commit -m 'Add: mindful addition'`)
-4. Push to the Branch (`git push origin feature/mindful-addition`)
-5. Open a Pull Request
+### Color Palette Tokens
+
+```css
+@theme {
+  --color-ivory: #F8F7F2;       /* Base background canvas */
+  --color-cream: #EFEDE5;       /* Elevated container backgrounds */
+  --color-charcoal: #242722;    /* Primary editorial typography */
+  --color-stone: #77796F;       /* Secondary body & caption copy */
+  --color-sage: #82927B;        /* Primary organic accent */
+  --color-sage-light: #9AA894;  /* Hover & secondary highlights */
+  --color-sage-dark: #6B7A64;   /* Deep interactive accents */
+  --color-forest: #202820;      /* Dark cards & high-contrast sections */
+  --color-forest-light: #2A3A2A;/* Card hover elevations */
+  --color-gold: #C4A879;        /* Warm typographic badges */
+  --color-gold-light: #D4BC95;  /* Subtle metallic accents */
+  --color-border: #E5E3DC;      /* Delicate structural dividers */
+  --color-white: #FFFFFF;       /* Pure white highlights */
+}
+```
+
+### Fluid Typographic Scaling
+Headings utilize mathematically tuned fluid `clamp()` formulas that seamlessly scale between mobile viewports and large desktop monitors without abrupt media query breakpoints:
+
+```css
+.heading-display {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw + 1rem, 5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.heading-editorial {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem);
+  line-height: 1.15;
+}
+
+.heading-pillar {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.25rem);
+  line-height: 1.2;
+}
+```
+
+### Accessibility & Reduced Motion
+In strict compliance with WCAG guidelines, all CSS transitions, animations, and smooth-scrolling behaviors gracefully degrade for users with motion sensitivities:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+```
 
 ---
 
-## 📄 License
+## 📂 Project Architecture Blueprint
 
-Distributed under the **MIT License**. See `LICENSE` for more information.
+```text
+lifeops-static-page/
+├── .github/
+│   └── workflows/
+│       └── azure-static-web-apps-*.yml # Automated OIDC Azure CI/CD Pipeline
+├── public/
+│   ├── staticwebapp.config.json        # Azure SWA SPA navigation routing rules
+│   ├── favicon.svg                     # Site vector favicon
+│   ├── icons.svg                       # SVG sprite definitions
+│   └── images/                         # Static visual assets
+├── scripts/
+│   ├── add-story.mjs                   # Interactive CLI generator for stories
+│   └── add-thought.mjs                 # Interactive CLI generator for daily thoughts
+├── src/
+│   ├── components/                     # Modular presentation components
+│   │   ├── DailyRituals.tsx            # 4-stage daily routine interactive tabs
+│   │   ├── FinalCTA.tsx                # Newsletter & concluding call to action
+│   │   ├── Footer.tsx                  # Dynamic dual-mode router-aware footer
+│   │   ├── Hero.tsx                    # Atmospheric landing hero section
+│   │   ├── ImperfectLife.tsx           # Wabi-sabi philosophy presentation
+│   │   ├── Journal.tsx                 # Micro-journaling reflective prompts
+│   │   ├── LifeCanvas.tsx              # Interactive Life Audit state engine
+│   │   ├── Manifesto.tsx               # Intentional living manifesto
+│   │   ├── Navbar.tsx                  # Glassmorphism dual-mode sticky header
+│   │   ├── Philosophy.tsx              # Core philosophical framework
+│   │   ├── PillarSection.tsx           # The 6 core foundational pillars
+│   │   ├── ScrollReveal.tsx            # Framer Motion intersection wrapper
+│   │   ├── SectionHeading.tsx          # Reusable typography heading primitive
+│   │   ├── SlowLivingGallery.tsx       # Curated photographic grid
+│   │   ├── StoriesPreview.tsx          # Homepage preview of recent stories
+│   │   └── ThoughtPreview.tsx          # Homepage preview of today's thought
+│   ├── data/
+│   │   ├── stories.ts                  # Typed Story models & article repository
+│   │   └── thoughts.ts                 # Typed Thought models & rotation helpers
+│   ├── hooks/
+│   │   └── useActiveSection.ts         # IntersectionObserver scroll-spy hook
+│   ├── pages/
+│   │   ├── HomePage.tsx                # Assembled landing page experience
+│   │   ├── Layout.tsx                  # Root route shell with scroll restoration
+│   │   ├── StoriesPage.tsx             # Multi-category story archive & filter
+│   │   ├── StoryDetailPage.tsx         # Immersive single-story reader view
+│   │   └── ThoughtOfTheDayPage.tsx     # Quote card, carousel & monthly archive
+│   ├── App.tsx                         # Client-side router configuration
+│   ├── index.css                       # Tailwind v4 @theme & global typography
+│   └── main.tsx                        # React application DOM entrypoint
+├── index.html                          # HTML5 shell & Google Fonts preconnect
+├── package.json                        # Node package manifest & CLI scripts
+├── tsconfig.json                       # Root TypeScript project references
+├── tsconfig.app.json                   # Client-side TypeScript compiler config
+├── tsconfig.node.json                  # Node script TypeScript configuration
+└── vite.config.ts                      # Vite 8 bundler configuration
+```
 
 ---
+
+## ⚡ Content Automation CLI Reference
+
+The project includes purpose-built Node.js CLI tools in `scripts/` using pure `node:readline/promises` to allow updating content directly from the command line without manual JSON or TypeScript editing:
+
+### 1. Generating a Thought of the Day
+```bash
+npm run add:thought
+```
+**Interactive prompts:**
+- `Date`: Defaults to current calendar date (`YYYY-MM-DD`)
+- `Thought / Quote`: Quote string
+- `Author`: Defaults to `LifeOps`
+- `Category`: `Presence`, `Peace`, `Intention`, `Resilience`
+- `Reflection`: Practical takeaway prompt
+- Automatically selects high-resolution nature photography from Unsplash and safely injects the record into [`src/data/thoughts.ts`](src/data/thoughts.ts).
+
+### 2. Generating a Story
+```bash
+npm run add:story
+```
+**Interactive prompts:**
+- `Story Title`: Generates URL slug automatically (e.g. `the-midnight-train`)
+- `Subtitle`: Secondary poetic hook
+- `Category`: `Romance`, `Intimate`, `Detective`, `Fiction`, `Peace`, etc.
+- `Read time`: Estimated reading duration
+- `Body Paragraphs`: Multiline input ended by typing `END`
+- `Reflection`: Final contemplation prompt
+- Automatically prepends the story to [`src/data/stories.ts`](src/data/stories.ts).
+
+---
+
+## ☁️ DevOps & Azure Static Web Apps Deployment
+
+Deployments are entirely automated through GitHub Actions triggered on pushes to the `main` branch.
+
+```yaml
+# .github/workflows/azure-static-web-apps-*.yml
+name: Azure Static Web Apps CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches: [main]
+
+jobs:
+  build_and_deploy_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build And Deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: "upload"
+          app_location: "/"          # Root of project
+          api_location: ""           # Optional serverless API
+          output_location: "dist"    # Vite build output
+```
+
+### Production Build Verification
+Every commit triggers an automated pipeline verifying:
+1. Strict TypeScript compilation via `tsc -b` (zero tolerance for unused locals, implicit `any`, or broken typings).
+2. Vite 8 production bundling with Rollup code-splitting.
+3. Verification of `staticwebapp.config.json` inside `/dist` for client-side routing rewrites.
+
+---
+
+## 🛠️ Developer Quickstart & Command Reference
+
+### Local Environment Setup
+```bash
+# 1. Clone repository
+git clone https://github.com/arindampersonal/lifeops-static.git
+cd lifeops-static
+
+# 2. Install dependencies
+npm install
+
+# 3. Start local development server (HMR enabled)
+npm run dev
+```
+
+### Command Reference Table
+
+| Script | Command | Purpose |
+|:---|:---|:---|
+| `dev` | `npm run dev` | Boots local Vite development server at `http://localhost:5173` |
+| `build` | `npm run build` | Executes TypeScript validation (`tsc -b`) and builds production assets to `/dist` |
+| `preview` | `npm run preview` | Locally serves the optimized production bundle from `/dist` |
+| `lint` | `npm run lint` | Runs Oxlint across all TypeScript and TSX files |
+| `add:thought` | `npm run add:thought` | Interactive CLI to append a new Thought of the Day record |
+| `add:story` | `npm run add:story` | Interactive CLI to append a new Story record |
+
+---
+
+## 📄 License & Attribution
+
+Distributed under the **MIT License**. Engineered and curated with intention by **[Arindam Dutta](https://github.com/ArindamDutta1)**.
 
 <div align="center">
-
-Crafted with 🤍 & intentionality by **[Arindam Dutta](https://github.com/ArindamDutta1)**
-
-*“Take a deep breath. Slow down. You are right where you need to be.”*
-
+<br />
+<i>“We do not manage life like a spreadsheet; we curate it like a living garden.”</i>
 </div>
