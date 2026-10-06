@@ -1,34 +1,22 @@
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Philosophy from './components/Philosophy'
-import PillarSection from './components/PillarSection'
-import DailyRituals from './components/DailyRituals'
-import ImperfectLife from './components/ImperfectLife'
-import LifeCanvas from './components/LifeCanvas'
-import SlowLivingGallery from './components/SlowLivingGallery'
-import Journal from './components/Journal'
-import Manifesto from './components/Manifesto'
-import FinalCTA from './components/FinalCTA'
-import Footer from './components/Footer'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './pages/Layout'
+import HomePage from './pages/HomePage'
+import StoriesPage from './pages/StoriesPage'
+import StoryDetailPage from './pages/StoryDetailPage'
+import ThoughtOfTheDayPage from './pages/ThoughtOfTheDayPage'
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main>
-        <Hero />
-        <Philosophy />
-        <PillarSection />
-        <DailyRituals />
-        <ImperfectLife />
-        <LifeCanvas />
-        <SlowLivingGallery />
-        <Journal />
-        <Manifesto />
-        <FinalCTA />
-      </main>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/stories" element={<StoriesPage />} />
+          <Route path="/stories/:id" element={<StoryDetailPage />} />
+          <Route path="/thought-of-the-day" element={<ThoughtOfTheDayPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

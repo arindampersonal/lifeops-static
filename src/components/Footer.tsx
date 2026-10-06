@@ -1,6 +1,7 @@
 import { ArrowUp } from 'lucide-react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-const footerLinks = [
+const anchorLinks = [
   { label: 'Philosophy', href: '#philosophy' },
   { label: 'The Pillars', href: '#pillars' },
   { label: 'Daily Rituals', href: '#rituals' },
@@ -9,10 +10,26 @@ const footerLinks = [
   { label: 'Manifesto', href: '#manifesto' },
 ]
 
+const pageLinks = [
+  { label: 'Stories', to: '/stories' },
+  { label: 'Thought of the Day', to: '/thought-of-the-day' },
+]
+
 export default function Footer() {
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const isHome = location.pathname === '/'
+
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+    if (isHome) {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate('/')
+      setTimeout(() => {
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+      }, 100)
+    }
   }
 
   return (
@@ -55,11 +72,11 @@ export default function Footer() {
           <div>
             <h4 className="text-white text-sm font-medium mb-4">Explore</h4>
             <nav className="space-y-2.5">
-              {footerLinks.map((link) => (
+              {anchorLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={(e) => handleClick(e, link.href)}
+                  onClick={(e) => handleAnchorClick(e, link.href)}
                   className="block text-sm text-white/40 hover:text-white/80 transition-colors duration-200"
                 >
                   {link.label}
@@ -68,8 +85,23 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Back to top */}
-          <div className="flex flex-col items-start lg:items-end justify-between">
+          {/* Pages + Back to top */}
+          <div className="flex flex-col justify-between">
+            <div>
+              <h4 className="text-white text-sm font-medium mb-4">Discover</h4>
+              <nav className="space-y-2.5 mb-8">
+                {pageLinks.map((link) => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    className="block text-sm text-white/40 hover:text-white/80 transition-colors duration-200"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="flex items-center gap-2 text-sm text-white/40 hover:text-white/80 transition-colors duration-200 group"

@@ -8,6 +8,8 @@ const sections = [
   'imperfect',
   'canvas',
   'gallery',
+  'thought',
+  'stories',
   'journal',
   'manifesto',
   'cta',
